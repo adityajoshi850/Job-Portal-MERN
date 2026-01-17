@@ -48,14 +48,13 @@ const isAuthenticated = (req, res, next) => {
 
 const checkUserRole = (...roles) => {
     return (req, res, next) => {
-        const userRole = String(req.user?.userRole || "").toLowerCase();
+        const userRole = String(req.user.userRole || "").toLowerCase();
         const allowed = roles.map(r => String(r).toLowerCase());
 
         if (!allowed.includes(userRole)) {
-            return res.status(400).json({
-                message: "Unauthorized access - role mismatch",
-            });
+            return res.status(400).json({ message: "Unauthorized access - role mismatch" });
         }
+
         next();
     };
 };

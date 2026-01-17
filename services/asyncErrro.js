@@ -1,15 +1,10 @@
-export const asyncError = (fn) => {
-    return async (req, res, next) => {
-        try {
-            await fn(req, res, next);
-        } catch (err) {
-            // ✅ if response already sent, don't try to send again
-            if (res.headersSent) return next ? next(err) : null;
+// Higher-order async wrapper for Express route handlers.
+// Prevents unhandled promise rejections and forwards errors to Express.
 
-            return res.status(500).json({
-                message: "Server Error",
-                error: err.message,
-            });
-        }
+const asyncError = (fn) => {
+    return (req, res, next) => {
+        Promise.resolve(fn(req, res, next)).catch(next);
     };
 };
+
+module.exports = { asyncError };
