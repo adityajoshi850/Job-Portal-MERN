@@ -74,7 +74,7 @@ const updateApplicationStatus = async (req, res) => {
     }
 
     // allowed enum values check (matches your model)
-    const allowed = ["pending", "accepted", "rejected"];
+    const allowed = ["applied", "accepted", "rejected"];
     if (!allowed.includes(String(status).toLowerCase())) {
         return res.status(400).json({
             message: `Invalid status. Use: ${allowed.join(", ")}`,
