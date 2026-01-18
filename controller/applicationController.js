@@ -1,12 +1,12 @@
 const Application = require("../model/ApplicatinModel");
-const Job = require("../model/JobModel"); // only if you want to validate job exists (safe)
-const User = require("../model/UserModel"); // only if you want include user (optional)
+const Job = require("../model/JobModel");
+const User = require("../model/UserModel");
 
 const jobApply = async (req, res) => {
     const { jobId } = req.params;
     const userId = req.user.id;
 
-    // ✅ correct role (your DB enum is jobseeker/jobprovider)
+
     if (String(req.user.userRole).toLowerCase() === "jobprovider") {
         return res.status(400).json({
             message: "Only job seeker can apply for job",
@@ -17,13 +17,13 @@ const jobApply = async (req, res) => {
         return res.status(400).json({ message: "jobId is required" });
     }
 
-    // ✅ optional but recommended: ensure job exists
+
     const job = await Job.findByPk(jobId);
     if (!job) {
         return res.status(404).json({ message: "Job not found" });
     }
 
-    // ✅ prevent duplicate applications by same user to same job
+
     const existing = await Application.findOne({
         where: { jobId, userId },
     });
@@ -37,7 +37,7 @@ const jobApply = async (req, res) => {
     const application = await Application.create({
         jobId,
         userId,
-        // status will default to "pending" from model
+
     });
 
     return res.status(201).json({
@@ -48,8 +48,7 @@ const jobApply = async (req, res) => {
 
 const getApplications = async (req, res) => {
     const applications = await Application.findAll({
-        // optional: include related data
-        // include: [{ model: Job }, { model: User }],
+
         order: [["createdAt", "DESC"]],
     });
 
@@ -100,7 +99,7 @@ const updateApplicationStatus = async (req, res) => {
 };
 
 const deleteApplication = async (req, res) => {
-    // ✅ your route is "/:id" so use id
+
     const { id } = req.params;
 
     const application = await Application.findByPk(id);

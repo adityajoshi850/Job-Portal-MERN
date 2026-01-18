@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 
-// ✅ Read DB connection string from .env
+// Read DB connection string from .env
 const DATABASE_URL = process.env.DATABASE_URL;
 
 const sequelize = new Sequelize(DATABASE_URL, {
@@ -24,10 +24,7 @@ const connectDB = async () => {
     } catch (error) {
         console.error("Unable to connect to the database:", error);
     }
-
-    // ✅ IMPORTANT FIX:
-    // Your Supabase Users table is missing "username".
-    // alter:true will add missing columns to match your Sequelize models.
+    // Sync all defined models to the DB
     await sequelize.sync({ alter: false });
 
     console.log("All models were synchronized successfully.");

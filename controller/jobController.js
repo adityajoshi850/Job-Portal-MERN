@@ -55,7 +55,6 @@ const updateJob = async (req, res) => {
         return res.status(404).json({ message: "Job not found" });
     }
 
-    // ✅ Only allow owner to update
     if (job.userId !== req.user.id) {
         return res.status(403).json({ message: "You can only update your own jobs" });
     }
@@ -84,7 +83,6 @@ const deleteJob = async (req, res) => {
         return res.status(404).json({ message: "Job not found" });
     }
 
-    // ✅ Only allow owner to delete
     if (job.userId !== req.user.id) {
         return res.status(403).json({ message: "You can only delete your own jobs" });
     }

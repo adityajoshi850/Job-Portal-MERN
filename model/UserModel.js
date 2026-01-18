@@ -14,7 +14,7 @@ const User = sequelize.define(
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: "unknown", // ✅ ADDED (prevents notNull crash)
+            defaultValue: "unknown", 
             field: "name",
         },
 

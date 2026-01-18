@@ -13,37 +13,37 @@ const Job = sequelize.define(
         jobTitle: {
             type: DataTypes.STRING,
             allowNull: false,
-            field: "title", // ✅ Supabase column
+            field: "title",
         },
 
         jobDescription: {
             type: DataTypes.TEXT,
             allowNull: false,
-            field: "description", // ✅ Supabase column
+            field: "description",
         },
 
         jobCompany: {
             type: DataTypes.STRING,
             allowNull: false,
-            field: "company", // ✅ Supabase column
+            field: "company",
         },
 
         jobLocation: {
             type: DataTypes.STRING,
             allowNull: false,
-            field: "location", // ✅ Supabase column
+            field: "location",
         },
 
         jobSalary: {
             type: DataTypes.STRING,
             allowNull: false,
-            field: "salary", // ✅ Supabase column
+            field: "salary",
         },
 
         userId: {
             type: DataTypes.UUID,
             allowNull: false,
-            field: "userId", // ✅ Supabase column
+            field: "userId",
         },
     },
     {

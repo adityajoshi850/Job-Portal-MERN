@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const User = require("./model/UserModel"); // or wherever you import User from
+const User = require("./model/UserModel"); 
 
 const seedAdminUser = async () => {
     const adminEmail = process.env.ADMIN_EMAIL;
@@ -19,14 +19,14 @@ const seedAdminUser = async () => {
         return;
     }
 
-    // ✅ THIS LINE WAS MISSING IN YOUR FILE
+    
     const hashedPassword = await bcrypt.hash(adminPassword, 10);
 
     await User.create({
         name: "Admin",
         username: "admin",
         userEmail: adminEmail,
-        userPassword: hashedPassword, // ✅ now defined
+        userPassword: hashedPassword, 
         userRole: "jobprovider",
     });
 

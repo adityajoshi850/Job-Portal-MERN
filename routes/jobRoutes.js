@@ -10,10 +10,10 @@ router.post("/job", isAuthenticated, checkUserRole("jobProvider"), asyncError(cr
 // READ
 router.get("/jobs", asyncError(getAllJobs));
 
-// UPDATE  ✅ add this
+// UPDATE  
 router.patch("/job/:id", isAuthenticated, checkUserRole("jobProvider"), asyncError(updateJob));
 
-// DELETE  ✅ add this
+// DELETE  
 router.delete("/job/:id", isAuthenticated, checkUserRole("jobProvider"), asyncError(deleteJob));
 
 module.exports = router;
